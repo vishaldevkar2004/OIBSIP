@@ -18,7 +18,7 @@ The system provides basic reservation and cancellation functionality with databa
 
 - **Programming Language:** Java
 - **GUI:** Java Swing
-- **Database:** MySQL 8.0.45
+- **Database:** MySQL 9.7.0
 - **Database Connectivity:** JDBC
 - **IDE:** Eclipse
 - **Version Control:** Git & GitHub
