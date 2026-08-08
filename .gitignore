@@ -1,0 +1,11 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Compiled Java files
+bin/
+*.class
+
+# Local database configuration
+db.properties
