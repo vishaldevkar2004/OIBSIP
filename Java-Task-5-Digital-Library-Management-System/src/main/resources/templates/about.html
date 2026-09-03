@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About - Digital Library</title>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+	background: #f5f7fb;
+	color: #1f2937;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+	height: 70px;
+	background: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 7%;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+	font-size: 24px;
+	font-weight: bold;
+	color: #2563eb;
+}
+
+.logo span {
+	color: #111827;
+}
+
+.nav-links {
+	display: flex;
+	gap: 28px;
+	list-style: none;
+	align-items: center;
+}
+
+.nav-links a {
+	text-decoration: none;
+	color: #374151;
+	font-size: 15px;
+	font-weight: 500;
+	transition: 0.3s;
+}
+
+.nav-links a:hover {
+	color: #2563eb;
+}
+
+.login-btn {
+	background: #2563eb;
+	color: white !important;
+	padding: 10px 20px;
+	border-radius: 6px;
+}
+
+.login-btn:hover {
+	background: #1d4ed8;
+}
+
+/* ================= HERO ================= */
+.about-hero {
+	min-height: 350px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 60px 7%;
+	background: linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.62)),
+		url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=2000&q=90");
+	background-size: cover;
+	background-position: center;
+}
+
+.about-hero-content {
+	max-width: 800px;
+}
+
+.about-hero h1 {
+	font-size: 48px;
+	color: white;
+	margin-bottom: 15px;
+}
+
+.about-hero h1 span {
+	color: #60a5fa;
+}
+
+.about-hero p {
+	font-size: 17px;
+	line-height: 1.7;
+	color: #f1f5f9;
+}
+
+/* ================= ABOUT SECTION ================= */
+.about-section {
+	padding: 75px 7%;
+	background: #ffffff;
+}
+
+.about-container {
+	max-width: 1100px;
+	margin: auto;
+}
+
+.section-heading {
+	text-align: center;
+	margin-bottom: 45px;
+}
+
+.section-heading h2 {
+	font-size: 34px;
+	color: #111827;
+	margin-bottom: 12px;
+}
+
+.section-heading p {
+	color: #6b7280;
+	font-size: 16px;
+}
+
+/* ================= ABOUT CONTENT ================= */
+.about-content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 35px;
+	align-items: center;
+}
+
+.about-text {
+	background: #f8fafc;
+	padding: 35px;
+	border-radius: 12px;
+	border: 1px solid #e5e7eb;
+}
+
+.about-text h3 {
+	font-size: 24px;
+	color: #111827;
+	margin-bottom: 18px;
+}
+
+.about-text p {
+	color: #6b7280;
+	line-height: 1.8;
+	font-size: 15px;
+	margin-bottom: 15px;
+}
+
+/* ================= HIGHLIGHT CARD ================= */
+.about-highlight {
+	background: #2563eb;
+	color: white;
+	padding: 35px;
+	border-radius: 12px;
+	box-shadow: 0 10px 25px rgba(37, 99, 235, 0.18);
+}
+
+.about-highlight h3 {
+	font-size: 24px;
+	margin-bottom: 22px;
+}
+
+.highlight-item {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	margin-bottom: 20px;
+}
+
+.highlight-icon {
+	font-size: 30px;
+}
+
+.highlight-item h4 {
+	font-size: 17px;
+	margin-bottom: 5px;
+}
+
+.highlight-item p {
+	font-size: 13px;
+	line-height: 1.5;
+	opacity: 0.9;
+}
+
+/* ================= FEATURES ================= */
+.features {
+	padding: 75px 7%;
+	background: #f5f7fb;
+	text-align: center;
+}
+
+.features h2 {
+	font-size: 34px;
+	margin-bottom: 12px;
+	color: #111827;
+}
+
+.features>p {
+	color: #6b7280;
+	margin-bottom: 45px;
+	font-size: 16px;
+}
+
+.feature-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 28px;
+	max-width: 1100px;
+	margin: auto;
+}
+
+.feature-card {
+	padding: 35px 28px;
+	background: #ffffff;
+	border-radius: 12px;
+	border: 1px solid #e5e7eb;
+	transition: 0.3s;
+}
+
+.feature-card:hover {
+	transform: translateY(-7px);
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.09);
+}
+
+.feature-icon {
+	font-size: 42px;
+	margin-bottom: 18px;
+}
+
+.feature-card h3 {
+	margin-bottom: 12px;
+	color: #111827;
+	font-size: 20px;
+}
+
+.feature-card p {
+	color: #6b7280;
+	line-height: 1.7;
+	font-size: 14px;
+}
+
+/* ================= CTA ================= */
+.cta {
+	padding: 65px 7%;
+	text-align: center;
+	background: #2563eb;
+	color: white;
+}
+
+.cta h2 {
+	font-size: 32px;
+	margin-bottom: 13px;
+}
+
+.cta p {
+	margin-bottom: 27px;
+	opacity: 0.92;
+}
+
+.cta a {
+	display: inline-block;
+	text-decoration: none;
+	background: white;
+	color: #2563eb;
+	padding: 13px 28px;
+	border-radius: 7px;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.cta a:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* ================= FOOTER ================= */
+footer {
+	background: #111827;
+	color: #9ca3af;
+	text-align: center;
+	padding: 22px;
+	font-size: 14px;
+}
+
+/* ================= TABLET ================= */
+@media ( max-width : 900px) {
+	.about-content {
+		grid-template-columns: 1fr;
+	}
+	.feature-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* ================= MOBILE ================= */
+@media ( max-width : 480px) {
+	.navbar {
+		padding: 0 5%;
+	}
+	.logo {
+		font-size: 20px;
+	}
+	.nav-links {
+		display: none;
+	}
+	.about-hero {
+		min-height: 420px;
+		padding: 50px 20px;
+	}
+	.about-hero h1 {
+		font-size: 34px;
+	}
+	.about-hero p {
+		font-size: 15px;
+	}
+	.about-section {
+		padding: 60px 6%;
+	}
+	.section-heading h2 {
+		font-size: 28px;
+	}
+	.about-text, .about-highlight {
+		padding: 25px;
+	}
+	.feature-container {
+		grid-template-columns: 1fr;
+	}
+	.features {
+		padding: 60px 6%;
+	}
+	.features h2 {
+		font-size: 28px;
+	}
+	.cta h2 {
+		font-size: 27px;
+	}
+}
+</style>
+
+</head>
+
+<body>
+
+	<!-- ================= NAVBAR ================= -->
+
+	<nav class="navbar">
+
+		<div class="logo">
+			Digital<span>Library</span>
+		</div>
+
+		<ul class="nav-links">
+
+			<li><a href="/">Home</a></li>
+
+			<li><a href="/books">Books</a></li>
+
+			<li><a href="/about">About</a></li>
+
+			<li><a href="/login" class="login-btn">Login</a></li>
+
+		</ul>
+
+	</nav>
+
+
+	<!-- ================= HERO ================= -->
+
+	<section class="about-hero">
+
+		<div class="about-hero-content">
+
+			<h1>
+				About <span>Digital Library</span>
+			</h1>
+
+			<p>A simple and efficient digital platform designed to make
+				library management easier for both users and administrators.</p>
+
+		</div>
+
+	</section>
+
+
+	<!-- ================= ABOUT SECTION ================= -->
+
+	<section class="about-section">
+
+		<div class="about-container">
+
+			<div class="section-heading">
+
+				<h2>About Our System</h2>
+
+				<p>Making library management simple, organized and efficient.</p>
+
+			</div>
+
+
+			<div class="about-content">
+
+				<!-- ABOUT TEXT -->
+
+				<div class="about-text">
+
+					<h3>Digital Library Management System</h3>
+
+					<p>The Digital Library Management System is a web-based
+						application designed to simplify and improve the overall library
+						experience.</p>
+
+					<p>Users can browse and search for books, issue available
+						books, return books and reserve books that are currently
+						unavailable.</p>
+
+					<p>Administrators can manage books, monitor issued books,
+						manage registered users, handle reservations and manage library
+						fines.</p>
+
+					<p>The system provides a convenient and organized platform for
+						managing library activities digitally.</p>
+
+				</div>
+
+
+				<!-- HIGHLIGHTS -->
+
+				<div class="about-highlight">
+
+					<h3>Why Use Our System?</h3>
+
+
+					<div class="highlight-item">
+
+						<div class="highlight-icon">📚</div>
+
+						<div>
+
+							<h4>Easy Book Management</h4>
+
+							<p>Manage the library catalogue and book availability
+								efficiently.</p>
+
+						</div>
+
+					</div>
+
+
+					<div class="highlight-item">
+
+						<div class="highlight-icon">🔄</div>
+
+						<div>
+
+							<h4>Simple Issue & Return</h4>
+
+							<p>Keep track of issued books, due dates and returns.</p>
+
+						</div>
+
+					</div>
+
+
+					<div class="highlight-item">
+
+						<div class="highlight-icon">🔖</div>
+
+						<div>
+
+							<h4>Book Reservation</h4>
+
+							<p>Reserve books when they are currently unavailable.</p>
+
+						</div>
+
+					</div>
+
+
+					<div class="highlight-item">
+
+						<div class="highlight-icon">🔐</div>
+
+						<div>
+
+							<h4>Role-Based Access</h4>
+
+							<p>Separate access and functionality for Users and
+								Administrators.</p>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+
+	<!-- ================= FEATURES ================= -->
+
+	<section class="features">
+
+		<h2>System Features</h2>
+
+		<p>Everything you need for a simple digital library experience.</p>
+
+
+		<div class="feature-container">
+
+
+			<!-- Feature 1 -->
+
+			<div class="feature-card">
+
+				<div class="feature-icon">📖</div>
+
+				<h3>Browse Books</h3>
+
+				<p>Explore the available book catalogue and search books by
+					title, author or category.</p>
+
+			</div>
+
+
+			<!-- Feature 2 -->
+
+			<div class="feature-card">
+
+				<div class="feature-icon">🔄</div>
+
+				<h3>Issue & Return</h3>
+
+				<p>Issue available books and return them while keeping library
+					records updated.</p>
+
+			</div>
+
+
+			<!-- Feature 3 -->
+
+			<div class="feature-card">
+
+				<div class="feature-icon">🔖</div>
+
+				<h3>Book Reservation</h3>
+
+				<p>Reserve unavailable books and manage reservations through the
+					system.</p>
+
+			</div>
+
+
+			<!-- Feature 4 -->
+
+			<div class="feature-card">
+
+				<div class="feature-icon">💰</div>
+
+				<h3>Fine Management</h3>
+
+				<p>Calculate overdue fines and manage their payment status.</p>
+
+			</div>
+
+
+			<!-- Feature 5 -->
+
+			<div class="feature-card">
+
+				<div class="feature-icon">👤</div>
+
+				<h3>User Management</h3>
+
+				<p>Manage registered library users and provide appropriate
+					system access.</p>
+
+			</div>
+
+
+			<!-- Feature 6 -->
+
+			<div class="feature-card">
+
+				<div class="feature-icon">🔐</div>
+
+				<h3>Secure Access</h3>
+
+				<p>Role-based security helps protect User and Admin
+					functionality.</p>
+
+			</div>
+
+
+		</div>
+
+	</section>
+
+
+	<!-- ================= CTA ================= -->
+
+	<section class="cta">
+
+		<h2>Ready to Explore the Library?</h2>
+
+		<p>Login to your account and start exploring books today.</p>
+
+		<a href="/login"> Get Started </a>
+
+	</section>
+
+
+	<!-- ================= FOOTER ================= -->
+
+	<footer>
+
+		<p>© 2026 Digital Library Management System | All Rights Reserved
+		</p>
+
+	</footer>
+
+
+</body>
+
+</html>

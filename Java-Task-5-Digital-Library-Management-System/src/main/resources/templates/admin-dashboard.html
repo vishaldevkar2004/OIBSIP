@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard - Digital Library</title>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	background: #f4f7fb;
+	color: #1f2937;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+	height: 70px;
+	background: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 6%;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+	font-size: 24px;
+	font-weight: bold;
+	color: #2563eb;
+}
+
+.logo span {
+	color: #111827;
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.welcome {
+	font-size: 14px;
+	color: #4b5563;
+}
+
+.logout-btn {
+	text-decoration: none;
+	background: #ef4444;
+	color: white;
+	padding: 9px 17px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.logout-btn:hover {
+	background: #dc2626;
+}
+
+/* ================= HERO ================= */
+.hero {
+	width: 88%;
+	margin: 35px auto;
+	min-height: 250px;
+	display: flex;
+	align-items: center;
+	padding: 45px;
+	border-radius: 18px;
+	color: white;
+	background: linear-gradient(rgba(15, 23, 42, 0.75),
+		rgba(15, 23, 42, 0.75)), url("/images/library-bg.png");
+	background-size: cover;
+	background-position: center;
+}
+
+.hero-content {
+	max-width: 700px;
+}
+
+.hero h1 {
+	font-size: 36px;
+	margin-bottom: 12px;
+}
+
+.hero p {
+	font-size: 16px;
+	line-height: 1.6;
+	color: #e5e7eb;
+}
+
+/* ================= DASHBOARD ================= */
+.dashboard {
+	width: 88%;
+	margin: 0 auto 50px;
+}
+
+.section-title {
+	margin-bottom: 20px;
+}
+
+.section-title h2 {
+	font-size: 25px;
+	color: #111827;
+}
+
+.section-title p {
+	color: #6b7280;
+	margin-top: 5px;
+}
+
+/* ================= CARDS ================= */
+.cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 22px;
+}
+
+.card {
+	background: #ffffff;
+	padding: 28px 24px;
+	border-radius: 12px;
+	box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+	transition: 0.3s;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.11);
+}
+
+.card-icon {
+	width: 52px;
+	height: 52px;
+	border-radius: 10px;
+	background: #eff6ff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 26px;
+	margin-bottom: 18px;
+}
+
+.card h3 {
+	font-size: 19px;
+	margin-bottom: 9px;
+	color: #111827;
+}
+
+.card p {
+	color: #6b7280;
+	font-size: 14px;
+	line-height: 1.5;
+	margin-bottom: 18px;
+}
+
+.card-btn {
+	display: inline-block;
+	text-decoration: none;
+	background: #2563eb;
+	color: white;
+	padding: 9px 16px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.card-btn:hover {
+	background: #1d4ed8;
+}
+
+/* ================= FOOTER ================= */
+footer {
+	text-align: center;
+	padding: 25px;
+	color: #6b7280;
+	font-size: 13px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media ( max-width : 900px) {
+	.cards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.hero h1 {
+		font-size: 30px;
+	}
+}
+
+@media ( max-width : 600px) {
+	.navbar {
+		padding: 0 20px;
+	}
+	.welcome {
+		display: none;
+	}
+	.hero {
+		width: 92%;
+		padding: 30px 25px;
+		min-height: 230px;
+	}
+	.hero h1 {
+		font-size: 27px;
+	}
+	.dashboard {
+		width: 92%;
+	}
+	.cards {
+		grid-template-columns: 1fr;
+	}
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+	<!-- ================= NAVBAR ================= -->
+
+	<nav class="navbar">
+
+		<div class="logo">
+			Digital<span>Library</span>
+		</div>
+
+		<div class="nav-right">
+
+			<span class="welcome"> Welcome, Admin 👋 </span> <a href="/logout"
+				class="logout-btn"> Logout </a>
+
+		</div>
+
+	</nav>
+
+
+	<!-- ================= HERO ================= -->
+
+	<section class="hero">
+
+		<div class="hero-content">
+
+			<h1>Admin Dashboard 🛠️</h1>
+
+			<p>Manage books, registered members, issued books, reservations
+				and library fines from one place.</p>
+
+		</div>
+
+	</section>
+
+
+	<!-- ================= ADMIN SERVICES ================= -->
+
+	<main class="dashboard">
+
+		<div class="section-title">
+
+			<h2>Library Administration</h2>
+
+			<p>Choose an option to manage the digital library.</p>
+
+		</div>
+
+
+		<div class="cards">
+
+
+			<!-- ================= ADD BOOK ================= -->
+
+			<div class="card">
+
+				<div class="card-icon">➕</div>
+
+				<h3>Add New Book</h3>
+
+				<p>Add a new book to the library catalogue with title, author,
+					ISBN, category and quantity.</p>
+
+				<a href="/admin/add-book" class="card-btn"> Add Book </a>
+
+			</div>
+
+
+			<!-- ================= MANAGE BOOKS ================= -->
+
+			<div class="card">
+
+				<div class="card-icon">📚</div>
+
+				<h3>Manage Books</h3>
+
+				<p>View, search, edit or delete existing books from the library
+					catalogue.</p>
+
+				<a href="/books" class="card-btn"> Manage Books </a>
+
+			</div>
+
+
+			<!-- ================= ISSUED BOOKS ================= -->
+
+			<div class="card">
+
+				<div class="card-icon">📖</div>
+
+				<h3>Issued Books</h3>
+
+				<p>View all issued books and check their due dates and issue
+					details.</p>
+
+				<a href="/admin/issues" class="card-btn"> View Issues </a>
+
+			</div>
+
+
+			<!-- ================= MEMBERS ================= -->
+
+			<div class="card">
+
+				<div class="card-icon">👥</div>
+
+				<h3>Registered Members</h3>
+
+				<p>View and manage all registered library member accounts.</p>
+
+				<a href="/admin/members" class="card-btn"> View Members </a>
+
+			</div>
+
+
+			<!-- ================= FINES ================= -->
+
+			<div class="card">
+
+				<div class="card-icon">💰</div>
+
+				<h3>Fine Management</h3>
+
+				<p>View generated fines and mark pending fines as paid.</p>
+
+				<a href="/admin/fines" class="card-btn"> Manage Fines </a>
+
+			</div>
+
+
+			<!-- ================= USER QUERIES ================= -->
+
+			<div class="card">
+
+				<div class="card-icon">💬</div>
+
+				<h3>User Queries</h3>
+
+				<p>View messages and queries submitted by library users.</p>
+
+				<a href="/admin/queries" class="card-btn"> View Queries </a>
+
+			</div>
+
+
+		</div>
+
+	</main>
+
+
+	<!-- ================= FOOTER ================= -->
+
+	<footer> © 2026 Digital Library Management System. All Rights
+		Reserved. </footer>
+
+
+</body>
+
+</html>

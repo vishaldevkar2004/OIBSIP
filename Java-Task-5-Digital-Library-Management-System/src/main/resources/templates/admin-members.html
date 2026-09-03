@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Registered Members - Digital Library</title>
+
+<style>
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	background: #f4f7fb;
+	color: #1f2937;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+	height: 70px;
+	background: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 6%;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+	font-size: 24px;
+	font-weight: bold;
+	color: #2563eb;
+}
+
+.logo span {
+	color: #111827;
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+}
+
+.back-btn {
+	text-decoration: none;
+	color: #2563eb;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.back-btn:hover {
+	text-decoration: underline;
+}
+
+.logout-btn {
+	text-decoration: none;
+	background: #ef4444;
+	color: white;
+	padding: 9px 17px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.logout-btn:hover {
+	background: #dc2626;
+}
+
+/* ================= MAIN ================= */
+
+.container {
+	width: 88%;
+	margin: 40px auto 60px;
+}
+
+.page-heading {
+	margin-bottom: 25px;
+}
+
+.page-heading h1 {
+	font-size: 30px;
+	color: #111827;
+	margin-bottom: 7px;
+}
+
+.page-heading p {
+	color: #6b7280;
+	font-size: 15px;
+}
+
+/* ================= TABLE CARD ================= */
+
+.table-card {
+	background: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+	overflow-x: auto;
+}
+
+.members-table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 850px;
+}
+
+.members-table th {
+	background: #eff6ff;
+	color: #1e3a8a;
+	padding: 15px;
+	text-align: left;
+	font-size: 14px;
+}
+
+.members-table td {
+	padding: 15px;
+	border-bottom: 1px solid #e5e7eb;
+	font-size: 14px;
+}
+
+.members-table tr:hover {
+	background: #f9fafb;
+}
+
+/* ================= ROLE ================= */
+
+.role {
+	display: inline-block;
+	background: #dbeafe;
+	color: #1d4ed8;
+	padding: 5px 10px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+/* ================= EMPTY ================= */
+
+.empty-message {
+	text-align: center;
+	padding: 45px;
+	color: #6b7280;
+	font-size: 15px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+	text-align: center;
+	padding: 25px;
+	color: #6b7280;
+	font-size: 13px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+
+	.navbar {
+		padding: 0 20px;
+	}
+
+	.container {
+		width: 92%;
+	}
+
+	.page-heading h1 {
+		font-size: 25px;
+	}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+	<!-- ================= NAVBAR ================= -->
+
+	<nav class="navbar">
+
+		<div class="logo">
+			Digital<span>Library</span>
+		</div>
+
+		<div class="nav-right">
+
+			<a href="/admin-dashboard" class="back-btn">
+				← Dashboard
+			</a>
+
+			<a href="/logout" class="logout-btn">
+				Logout
+			</a>
+
+		</div>
+
+	</nav>
+
+
+	<!-- ================= MAIN CONTENT ================= -->
+
+	<main class="container">
+
+		<div class="page-heading">
+
+			<h1>👥 Registered Members</h1>
+
+			<p>
+				View all registered users of the digital library.
+			</p>
+
+		</div>
+
+
+		<!-- ================= MEMBERS TABLE ================= -->
+
+		<div class="table-card">
+
+			<table class="members-table">
+
+				<thead>
+
+					<tr>
+
+						<th>User ID</th>
+
+						<th>Full Name</th>
+
+						<th>Email</th>
+
+						<th>Phone</th>
+
+						<th>Registered Date</th>
+
+						<th>Role</th>
+
+					</tr>
+
+				</thead>
+
+
+				<tbody>
+
+					<!-- USER DATA -->
+
+					<tr th:each="user : ${users}">
+
+						<td th:text="${user.userId}">
+							1
+						</td>
+
+						<td th:text="${user.fullName}">
+							Vishal Devkar
+						</td>
+
+						<td th:text="${user.email}">
+							user@gmail.com
+						</td>
+
+						<td th:text="${user.phone}">
+							9876543210
+						</td>
+
+						<td th:text="${user.registeredDate}">
+							2026-08-15
+						</td>
+
+						<td>
+							<span class="role"
+								th:text="${user.role}">
+								USER
+							</span>
+						</td>
+
+					</tr>
+
+
+					<!-- EMPTY MESSAGE -->
+
+					<tr th:if="${#lists.isEmpty(users)}">
+
+						<td colspan="6" class="empty-message">
+							👥 No registered members found.
+						</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</main>
+
+
+	<!-- ================= FOOTER ================= -->
+
+	<footer>
+
+		© 2026 Digital Library Management System.
+		All Rights Reserved.
+
+	</footer>
+
+</body>
+
+</html>
