@@ -147,10 +147,55 @@ User
 
 Users can register, login, browse/search books, issue and return books, reserve books, and submit queries.
 
-📸 Screenshots
+## 📸 Screenshots
 
-Screenshots demonstrating the working application are included in the screenshots folder.
+### 🏠 Home Page
+![Home Page](screenshots/01-home.png)
 
+### 📝 User Registration
+![User Registration](screenshots/02-register.png)
+
+### 🔐 User Login
+![Login Page](screenshots/03-login.png)
+
+### 👤 User Dashboard
+![User Dashboard](screenshots/04-user-dashboard.png)
+
+### 📚 All Books
+![All Books](screenshots/05-all-books.png)
+
+### 🔎 Search Book
+![Search Book](screenshots/06-search-book.png)
+
+### 📖 Issue Book
+![Issue Book](screenshots/07-issue-book.png)
+
+### ↩️ Return Book
+![Return Book](screenshots/08-return-book.png)
+
+### 📌 Reserve Book
+![Reserve Book](screenshots/09-reserve.png)
+
+### 📋 Reservation Status
+![Reservation Status](screenshots/10-reservation.png)
+
+### 💰 Fine Management
+![Fine Management](screenshots/11-fine-management.png)
+
+### 👨‍💼 Admin Dashboard
+![Admin Dashboard](screenshots/12-admin-dashboard.png)
+
+### 📚 Book Management
+![Book Management](screenshots/13-book-management.png)
+
+### 👥 Users / Members Management
+![Users Management](screenshots/14-users-management.png)
+
+### 📩 Contact / Query Form
+![Contact Query](screenshots/15-contact-query.png)
+
+### 📬 Admin Contact Queries
+![Admin Contact Queries](screenshots/16-admin-contact-queries.png)
 🎯 Project Objective
 
 To build a web-based library management system that manages a catalogue of books, handles issuing and returns, tracks fines, supports advance bookings, and provides separate Admin and User functionality.
