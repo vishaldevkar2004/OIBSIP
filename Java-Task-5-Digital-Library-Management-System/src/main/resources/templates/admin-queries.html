@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>User Queries - Digital Library</title>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	background: #f4f7fb;
+	color: #1f2937;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+	height: 70px;
+	background: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 6%;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+	font-size: 24px;
+	font-weight: bold;
+	color: #2563eb;
+}
+
+.logo span {
+	color: #111827;
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+}
+
+.back-btn {
+	text-decoration: none;
+	color: #2563eb;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.back-btn:hover {
+	text-decoration: underline;
+}
+
+.logout-btn {
+	text-decoration: none;
+	background: #ef4444;
+	color: white;
+	padding: 9px 17px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.logout-btn:hover {
+	background: #dc2626;
+}
+
+/* ================= MAIN ================= */
+.container {
+	width: 92%;
+	margin: 40px auto 60px;
+}
+
+.page-heading {
+	margin-bottom: 25px;
+}
+
+.page-heading h1 {
+	font-size: 30px;
+	color: #111827;
+	margin-bottom: 7px;
+}
+
+.page-heading p {
+	color: #6b7280;
+	font-size: 15px;
+}
+
+/* ================= TABLE ================= */
+.table-card {
+	background: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+	overflow-x: auto;
+}
+
+.queries-table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 1100px;
+}
+
+.queries-table th {
+	background: #eff6ff;
+	color: #1e3a8a;
+	padding: 15px;
+	text-align: left;
+	font-size: 14px;
+}
+
+.queries-table td {
+	padding: 15px;
+	border-bottom: 1px solid #e5e7eb;
+	font-size: 14px;
+	vertical-align: top;
+}
+
+.queries-table tr:hover {
+	background: #f9fafb;
+}
+
+/* ================= MESSAGE ================= */
+.message-cell {
+	max-width: 350px;
+	line-height: 1.5;
+	color: #4b5563;
+}
+
+/* ================= EMPTY ================= */
+.empty-message {
+	text-align: center;
+	padding: 45px;
+	color: #6b7280;
+	font-size: 15px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+	text-align: center;
+	padding: 25px;
+	color: #6b7280;
+	font-size: 13px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media ( max-width : 700px) {
+	.navbar {
+		padding: 0 20px;
+	}
+	.container {
+		width: 94%;
+	}
+	.page-heading h1 {
+		font-size: 25px;
+	}
+}
+</style>
+
+</head>
+
+<body>
+
+	<!-- ================= NAVBAR ================= -->
+
+	<nav class="navbar">
+
+		<div class="logo">
+			Digital<span>Library</span>
+		</div>
+
+		<div class="nav-right">
+
+			<a href="/admin-dashboard" class="back-btn"> ← Dashboard </a> <a
+				href="/logout" class="logout-btn"> Logout </a>
+
+		</div>
+
+	</nav>
+
+
+	<!-- ================= MAIN CONTENT ================= -->
+
+	<main class="container">
+
+		<div class="page-heading">
+
+			<h1>💬 User Queries</h1>
+
+			<p>View queries and messages submitted by registered library
+				users.</p>
+
+		</div>
+
+
+		<!-- ================= QUERY TABLE ================= -->
+
+		<div class="table-card">
+
+			<table class="queries-table">
+
+				<thead>
+
+					<tr>
+
+						<th>Query ID</th>
+
+						<th>User ID</th>
+
+						<th>Name</th>
+
+						<th>Email</th>
+
+						<th>Subject</th>
+
+						<th>Message</th>
+
+						<th>Submitted At</th>
+
+					</tr>
+
+				</thead>
+
+
+				<tbody>
+
+					<!-- QUERY DATA -->
+
+					<tr th:each="query : ${queries}">
+
+						<td th:text="${query.queryId}">1</td>
+
+						<td th:text="${query.userId}">1</td>
+
+						<td th:text="${query.name}">John Doe</td>
+
+						<td th:text="${query.email}">user@gmail.com</td>
+
+						<td th:text="${query.subject}">Book Issue</td>
+
+						<td class="message-cell" th:text="${query.message}">I have a
+							question about book issue.</td>
+
+						<td th:text="${query.submittedAt}">2026-08-19T10:30</td>
+
+					</tr>
+
+
+					<!-- EMPTY MESSAGE -->
+
+					<tr th:if="${#lists.isEmpty(queries)}">
+
+						<td colspan="7" class="empty-message">💬 No user queries
+							found.</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</main>
+
+
+	<!-- ================= FOOTER ================= -->
+
+	<footer> © 2026 Digital Library Management System. All Rights
+		Reserved. </footer>
+
+</body>
+
+</html>

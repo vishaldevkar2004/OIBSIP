@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>User Dashboard - Digital Library</title>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	background: #f4f7fb;
+	color: #1f2937;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+	height: 70px;
+	background: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 6%;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+	font-size: 24px;
+	font-weight: bold;
+	color: #2563eb;
+}
+
+.logo span {
+	color: #111827;
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.welcome {
+	font-size: 14px;
+	color: #4b5563;
+}
+
+.logout-btn {
+	text-decoration: none;
+	background: #ef4444;
+	color: white;
+	padding: 9px 17px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.logout-btn:hover {
+	background: #dc2626;
+}
+
+/* ================= HERO ================= */
+.hero {
+	margin: 35px auto;
+	width: 88%;
+	min-height: 260px;
+	display: flex;
+	align-items: center;
+	padding: 45px;
+	border-radius: 18px;
+	color: white;
+	background: linear-gradient(rgba(15, 23, 42, 0.72),
+		rgba(15, 23, 42, 0.72)), url("/images/library-bg.png");
+	background-size: cover;
+	background-position: center;
+}
+
+.hero-content {
+	max-width: 650px;
+}
+
+.hero h1 {
+	font-size: 36px;
+	margin-bottom: 12px;
+}
+
+.hero p {
+	font-size: 16px;
+	line-height: 1.6;
+	color: #e5e7eb;
+}
+
+/* ================= DASHBOARD ================= */
+.dashboard {
+	width: 88%;
+	margin: 0 auto 50px;
+}
+
+.section-title {
+	margin-bottom: 20px;
+}
+
+.section-title h2 {
+	font-size: 25px;
+	color: #111827;
+}
+
+.section-title p {
+	color: #6b7280;
+	margin-top: 5px;
+}
+
+.cards {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 22px;
+}
+
+.card {
+	background: white;
+	padding: 28px 24px;
+	border-radius: 12px;
+	box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+	transition: 0.3s;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.11);
+}
+
+.card-icon {
+	width: 50px;
+	height: 50px;
+	border-radius: 10px;
+	background: #eff6ff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 25px;
+	margin-bottom: 18px;
+}
+
+.card h3 {
+	font-size: 19px;
+	margin-bottom: 9px;
+	color: #111827;
+}
+
+.card p {
+	color: #6b7280;
+	font-size: 14px;
+	line-height: 1.5;
+	margin-bottom: 18px;
+}
+
+.card-btn {
+	display: inline-block;
+	text-decoration: none;
+	background: #2563eb;
+	color: white;
+	padding: 9px 16px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.card-btn:hover {
+	background: #1d4ed8;
+}
+
+/* ================= SEARCH QUICK ACCESS ================= */
+.search-section {
+	margin-top: 35px;
+	background: #ffffff;
+	padding: 25px;
+	border-radius: 12px;
+	box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+}
+
+.search-section h3 {
+	font-size: 20px;
+	color: #111827;
+	margin-bottom: 7px;
+}
+
+.search-section p {
+	color: #6b7280;
+	font-size: 14px;
+	margin-bottom: 18px;
+}
+
+.search-form {
+	display: flex;
+	gap: 10px;
+}
+
+.search-form input {
+	flex: 1;
+	padding: 12px 14px;
+	border: 1px solid #d1d5db;
+	border-radius: 7px;
+	font-size: 14px;
+	outline: none;
+}
+
+.search-form input:focus {
+	border-color: #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+.search-btn {
+	border: none;
+	background: #2563eb;
+	color: white;
+	padding: 12px 22px;
+	border-radius: 7px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.search-btn:hover {
+	background: #1d4ed8;
+}
+
+/* ================= FOOTER ================= */
+footer {
+	text-align: center;
+	padding: 25px;
+	color: #6b7280;
+	font-size: 13px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media ( max-width : 900px) {
+	.cards {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.hero h1 {
+		font-size: 30px;
+	}
+}
+
+@media ( max-width : 600px) {
+	.navbar {
+		padding: 0 20px;
+	}
+	.welcome {
+		display: none;
+	}
+	.hero {
+		width: 92%;
+		padding: 30px 25px;
+		min-height: 230px;
+	}
+	.hero h1 {
+		font-size: 27px;
+	}
+	.dashboard {
+		width: 92%;
+	}
+	.cards {
+		grid-template-columns: 1fr;
+	}
+	.search-form {
+		flex-direction: column;
+	}
+	.search-btn {
+		width: 100%;
+	}
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+	<!-- ================= NAVBAR ================= -->
+
+	<nav class="navbar">
+
+		<div class="logo">
+			Digital<span>Library</span>
+		</div>
+
+		<div class="nav-right">
+
+			<span class="welcome"> Welcome, User 👋 </span> <a href="/logout"
+				class="logout-btn"> Logout </a>
+
+		</div>
+
+	</nav>
+
+
+	<!-- ================= HERO ================= -->
+
+	<section class="hero">
+
+		<div class="hero-content">
+
+			<h1>Welcome to Your Library 📚</h1>
+
+			<p>Explore books, manage your reservations, check issued books
+				and keep track of your library activities from one place.</p>
+
+		</div>
+
+	</section>
+
+
+	<!-- ================= DASHBOARD ================= -->
+
+	<main class="dashboard">
+
+		<div class="section-title">
+
+			<h2>Library Services</h2>
+
+			<p>Choose an option to continue.</p>
+
+		</div>
+
+
+		<div class="cards">
+
+
+			<!-- Browse Books -->
+
+			<div class="card">
+
+				<div class="card-icon">📚</div>
+
+				<h3>Browse Books</h3>
+
+				<p>Search and explore books available in the digital library.</p>
+
+				<a href="/books" class="card-btn"> View Books </a>
+
+			</div>
+
+
+			<!-- My Issues -->
+
+			<div class="card">
+
+				<div class="card-icon">📖</div>
+
+				<h3>My Issued Books</h3>
+
+				<p>View books currently issued to your library account.</p>
+
+				<a href="/my-issues" class="card-btn"> View Issues </a>
+
+			</div>
+
+
+			<!-- Reservations -->
+
+			<div class="card">
+
+				<div class="card-icon">🔖</div>
+
+				<h3>My Reservations</h3>
+
+				<p>Check your reserved books and reservation status.</p>
+
+				<a href="/my-reservations" class="card-btn"> Reservations </a>
+
+			</div>
+
+
+			<!-- Fines -->
+
+			<div class="card">
+
+				<div class="card-icon">💰</div>
+
+				<h3>My Fines</h3>
+
+				<p>Check your pending and paid library fines.</p>
+
+				<a href="/my-fines" class="card-btn"> View Fines </a>
+
+			</div>
+
+
+			<!-- Profile -->
+
+			<div class="card">
+
+				<div class="card-icon">👤</div>
+
+				<h3>My Profile</h3>
+
+				<p>View and manage your library account information.</p>
+
+				<a href="#" class="card-btn"> My Profile </a>
+
+			</div>
+
+
+			<!-- Contact -->
+
+			<div class="card">
+
+				<div class="card-icon">💬</div>
+
+				<h3>Contact Library</h3>
+
+				<p>Have a question? Contact the library administration.</p>
+
+				<a href="/contact" class="card-btn"> Contact Us </a>
+
+			</div>
+
+
+		</div>
+
+
+		<!-- ================= QUICK SEARCH ================= -->
+
+		<section class="search-section">
+
+			<h3>🔎 Search Library Books</h3>
+
+			<p>Search books directly by title or author.</p>
+
+			<form action="/books" method="get" class="search-form">
+
+				<input type="text" name="keyword"
+					placeholder="Enter book title or author..." required>
+
+				<button type="submit" class="search-btn">Search Books</button>
+
+			</form>
+
+		</section>
+
+
+	</main>
+
+
+	<!-- ================= FOOTER ================= -->
+
+	<footer> © 2026 Digital Library Management System. All Rights
+		Reserved. </footer>
+
+
+</body>
+
+</html>

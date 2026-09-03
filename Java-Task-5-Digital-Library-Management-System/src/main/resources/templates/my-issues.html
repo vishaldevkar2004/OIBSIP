@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Issued Books - Digital Library</title>
+
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+}
+
+body {
+	min-height: 100vh;
+	background: #f4f7fb;
+	color: #1f2937;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+	height: 70px;
+	background: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 6%;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+	font-size: 24px;
+	font-weight: bold;
+	color: #2563eb;
+}
+
+.logo span {
+	color: #111827;
+}
+
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.back-btn {
+	text-decoration: none;
+	color: #2563eb;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.logout-btn {
+	text-decoration: none;
+	background: #ef4444;
+	color: white;
+	padding: 9px 17px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.logout-btn:hover {
+	background: #dc2626;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+	width: 88%;
+	margin: 40px auto 60px;
+}
+
+.page-heading {
+	margin-bottom: 25px;
+}
+
+.page-heading h1 {
+	font-size: 30px;
+	color: #111827;
+	margin-bottom: 7px;
+}
+
+.page-heading p {
+	color: #6b7280;
+	font-size: 15px;
+}
+
+/* ================= TABLE ================= */
+.table-card {
+	background: white;
+	border-radius: 12px;
+	box-shadow: 0 5px 18px rgba(0, 0, 0, 0.07);
+	overflow-x: auto;
+}
+
+.issues-table {
+	width: 100%;
+	border-collapse: collapse;
+	min-width: 800px;
+}
+
+.issues-table th {
+	background: #eff6ff;
+	color: #1e3a8a;
+	padding: 15px;
+	text-align: left;
+	font-size: 14px;
+}
+
+.issues-table td {
+	padding: 15px;
+	border-bottom: 1px solid #e5e7eb;
+	font-size: 14px;
+}
+
+.issues-table tr:hover {
+	background: #f9fafb;
+}
+
+/* ================= STATUS ================= */
+.status {
+	display: inline-block;
+	padding: 6px 10px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.status-issued {
+	background: #dcfce7;
+	color: #15803d;
+}
+
+.status-returned {
+	background: #e5e7eb;
+	color: #374151;
+}
+
+/* ================= RETURN BUTTON ================= */
+.return-btn {
+	text-decoration: none;
+	background: #2563eb;
+	color: white;
+	padding: 7px 13px;
+	border-radius: 5px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.return-btn:hover {
+	background: #1d4ed8;
+}
+
+/* ================= EMPTY ================= */
+.empty-message {
+	text-align: center;
+	padding: 45px;
+	color: #6b7280;
+	font-size: 15px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+	text-align: center;
+	padding: 25px;
+	color: #6b7280;
+	font-size: 13px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media ( max-width : 700px) {
+	.navbar {
+		padding: 0 20px;
+	}
+	.container {
+		width: 92%;
+	}
+	.page-heading h1 {
+		font-size: 25px;
+	}
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+	<!-- ================= NAVBAR ================= -->
+
+	<nav class="navbar">
+
+		<div class="logo">
+			Digital<span>Library</span>
+		</div>
+
+		<div class="nav-right">
+
+			<a href="/user-dashboard" class="back-btn"> ← Dashboard </a> <a
+				href="/logout" class="logout-btn"> Logout </a>
+
+		</div>
+
+	</nav>
+
+
+	<!-- ================= MAIN CONTENT ================= -->
+
+	<main class="container">
+
+
+		<!-- PAGE HEADING -->
+
+		<div class="page-heading">
+
+			<h1>📖 My Issued Books</h1>
+
+			<p>View books currently issued to your library account.</p>
+
+		</div>
+
+
+		<!-- ================= ISSUE TABLE ================= -->
+
+		<div class="table-card">
+
+			<table class="issues-table">
+
+				<thead>
+
+					<tr>
+
+						<th>Issue ID</th>
+
+						<th>Book ID</th>
+
+						<th>Issue Date</th>
+
+						<th>Due Date</th>
+
+						<th>Return Date</th>
+
+						<th>Status</th>
+
+						<th>Action</th>
+
+					</tr>
+
+				</thead>
+
+
+				<tbody>
+
+					<!-- ISSUE DATA -->
+
+					<tr th:each="issue : ${issues}">
+
+						<td th:text="${issue.issueId}">1</td>
+
+						<td th:text="${issue.bookId}">1</td>
+
+						<td th:text="${issue.issueDate}">2026-08-15</td>
+
+						<td th:text="${issue.dueDate}">2026-08-22</td>
+
+						<td th:text="${issue.returnDate != null ? issue.returnDate : '-'}">
+							-</td>
+
+						<td><span th:if="${issue.status == 'ISSUED'}"
+							class="status status-issued"> ISSUED </span> <span
+							th:if="${issue.status == 'RETURNED'}"
+							class="status status-returned"> RETURNED </span></td>
+
+						<td><a th:if="${issue.status == 'ISSUED'}"
+							th:href="@{/return-book/{id}(id=${issue.issueId})}"
+							class="return-btn"
+							onclick="return confirm('Are you sure you want to return this book?');">
+								Return Book </a> <span th:if="${issue.status == 'RETURNED'}">
+								Returned </span></td>
+
+					</tr>
+
+
+					<!-- EMPTY MESSAGE -->
+
+					<tr th:if="${#lists.isEmpty(issues)}">
+
+						<td colspan="7" class="empty-message">📚 You have no issued
+							books.</td>
+
+					</tr>
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</main>
+
+
+	<!-- ================= FOOTER ================= -->
+
+	<footer> © 2026 Digital Library Management System. All Rights
+		Reserved. </footer>
+
+
+</body>
+
+</html>
